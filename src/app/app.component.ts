@@ -1,20 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
-import {RouterOutlet} from '@angular/router';
 import {ApiMockService} from "./data-access/api-mock.service";
-import {HttpClientModule} from "@angular/common/http";
 import {catchError, combineLatest, retry, throwError} from "rxjs";
 import {CategoryMeta, PollCategory, PollWithCategoryMeta} from "./data-access/types";
-import {FilterCategoryComponent} from "./components/filter-category/filter-category.component";
-import {CardComponent} from "./components/card/card.component";
-import {CatDirective} from "./directive/cat.directive";
-import {ActiveBtnDirective} from "./directive/select-btn.directive";
 
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet, HttpClientModule, NgOptimizedImage, CatDirective, ActiveBtnDirective, FilterCategoryComponent, CardComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   providers: [ApiMockService]
