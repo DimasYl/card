@@ -1,4 +1,4 @@
-import {Directive, HostBinding, Input, OnInit} from "@angular/core";
+import {Directive, HostBinding, Input, OnChanges} from "@angular/core";
 import {PollCategory} from "../data-access/types";
 
 @Directive({
@@ -6,7 +6,7 @@ import {PollCategory} from "../data-access/types";
   standalone: true,
 })
 
-export class ActiveBtnDirective implements OnInit {
+export class ActiveBtnDirective implements OnChanges {
   @Input()
   public appActiveBtn!: PollCategory;
 
@@ -16,7 +16,7 @@ export class ActiveBtnDirective implements OnInit {
   @HostBinding('style.color')
   public color!: string;
 
-  public ngOnInit(): void {
+  public ngOnChanges(): void {
     if (this.appActiveBtn.alias === this.selectCat.alias) {
       this.color = 'white'
     } else this.color = 'black'

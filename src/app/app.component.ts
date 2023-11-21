@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiMockService} from "./data-access/api-mock.service";
 import {catchError, combineLatest, retry, throwError} from "rxjs";
-import {CategoryMeta, PollCategory, PollWithCategoryMeta} from "./data-access/types";
+import {CategoryMeta, Poll, PollCategory, PollWithCategoryMeta} from "./data-access/types";
 
 
 @Component({
@@ -23,6 +23,20 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+   this.getMockData();
+  }
+
+  public filterCategory(cat: PollCategory): void {
+    this.selectCategory = cat
+    this.polls = this.clonePolls.filter(el => el.category_id === cat.id)
+  }
+
+  public resetFilter(): void {
+    this.polls = this.clonePolls
+    this.selectCategory = {id: 999, alias: 'all', name: 'Все категории'};
+  }
+
+  private getMockData(): void {
     combineLatest(this.apiService.getCategories(),
       this.apiService.getPolls(),
       this.apiService.getCategoriesMeta()
@@ -36,38 +50,34 @@ export class AppComponent implements OnInit {
       this.category = cat;
       this.meta = meta
 
-      const categoryWithMeta = cat.map(c => {
-        const obj2 = meta.find(met => met.alias === c.alias);
-
-        if (obj2) {
-          return {...c, ...obj2};
-        }
-
-        return c;
-      });
-
-      this.polls = pol.map(p => {
-        const obj2 = categoryWithMeta.find(m => m.id === p.category_id);
-
-        if (obj2) {
-          return {...p, category: obj2};
-        }
-
-        return p;
-      }) as PollWithCategoryMeta[]
+      const categoryWithMeta = this.createCategoryWithMeta(cat, this.meta)
+      this.polls = this.createPollsWithCategory(pol, categoryWithMeta)
 
       this.clonePolls = this.polls
       this.loading = false
     })
   }
+  private createCategoryWithMeta(cat: PollCategory[], meta: CategoryMeta[]): PollCategory[] {
+    return cat.map(c => {
+      const obj2 = meta.find(met => met.alias === c.alias);
 
-  filterCategory(cat: PollCategory) {
-    this.selectCategory = cat
-    this.polls = this.clonePolls.filter(el => el.category_id === cat.id)
+      if (obj2) {
+        return {...c, ...obj2};
+      }
+
+      return c;
+    });
   }
 
-  resetFilter() {
-    this.polls = this.clonePolls
-    this.selectCategory = {id: 999, alias: 'all', name: 'Все категории'};
+  private createPollsWithCategory(pol: Poll[], categoryWithMeta: PollCategory[]): PollWithCategoryMeta[] {
+    return pol.map(p => {
+      const obj2 = categoryWithMeta.find(m => m.id === p.category_id);
+
+      if (obj2) {
+        return {...p, category: obj2};
+      }
+
+      return p;
+    }) as PollWithCategoryMeta[]
   }
 }
