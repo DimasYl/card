@@ -1,0 +1,62 @@
+.select-category {
+  margin-left: 2rem;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  gap: 1rem;
+  margin-left: 2rem;
+
+  .poll-card {
+    max-width: 400px;
+    width: 400px;
+    position: relative;
+
+    .poll-content {
+      display: flex;
+      justify-content: space-between;
+
+      .voters-count {
+        position: absolute;
+        top: 1rem;
+        left: 1.5rem;
+        color: white;
+        font-weight: bold;
+      }
+
+      .points {
+        position: absolute;
+        right: 1.5rem;
+        top: 1rem;
+        width: max-content;
+        padding: 3px;
+        background: white;
+        font-weight: bold;
+        border-radius: 40%;
+      }
+    }
+  }
+
+  .image {
+    border-radius: 1rem
+  }
+
+  .description {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .title {
+      border-radius: 10px;
+      padding: 3px;
+    }
+  }
+}
+
+.empty-card {
+  text-align: center
+}
