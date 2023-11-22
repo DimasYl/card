@@ -1,11 +1,11 @@
 import {Component, Input} from "@angular/core";
 import {PollCategory, PollWithCategoryMeta} from "../../data-access/types";
-import {CommonModule} from "@angular/common";
+import {CommonModule, NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   template: `
     <span class="select-category">{{selectCategory.name}}</span>
     <div *ngIf="polls.length; else emptyTemplate" class="card">
@@ -14,9 +14,9 @@ import {CommonModule} from "@angular/common";
           <span class="voters-count">{{poll.voters_count}}</span>
           <div class="points">+ {{poll.points}}</div>
         </div>
-        <img [src]="poll.image" width="400" height="200" alt="" class="image">
+        <img [ngSrc]="poll.image" width="400" loading="lazy" height="200" alt="" class="image">
         <div class="description">
-          <img [src]="poll?.category?.smallIcon" width="30" height="30" alt="">
+          <img [ngSrc]="poll.category.smallIcon" loading="lazy" width="30" height="30" alt="">
           <span class="title"
                 [style.background-color]="poll?.category?.backgroundColor">{{poll?.category?.name}}</span>
         </div>
