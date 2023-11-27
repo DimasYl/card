@@ -8,7 +8,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {CatDirective} from "./directive/cat.directive";
 import {ActiveBtnDirective} from "./directive/select-btn.directive";
 import {FilterCategoryComponent} from "./components/filter-category/filter-category.component";
-import {CardComponent} from "./components/card/card.component";
+import {CardsComponent} from "./components/card/cards.component";
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import {CardComponent} from "./components/card/card.component";
     CatDirective,
     ActiveBtnDirective,
     FilterCategoryComponent,
-    CardComponent
+    CardsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

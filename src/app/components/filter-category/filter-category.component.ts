@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from "@angular/core";
 import {CategoryMeta, PollCategory} from "../../data-access/types";
 import {CommonModule} from "@angular/common";
 import {ActiveBtnDirective} from "../../directive/select-btn.directive";
@@ -56,6 +56,7 @@ import {CatDirective} from "../../directive/cat.directive";
 
     `
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class FilterCategoryComponent {

@@ -1,15 +1,15 @@
 <h1 class="header">Голосования</h1>
-<ng-container *ngIf="loading">
+<ng-container *ngIf="stateService.loading">
   <h2 class="loading">Загрузка ... </h2>
 </ng-container>
 
-<ng-container *ngIf="category.length">
+<ng-container *ngIf="stateService.category.length">
   <div class="filter-category">
     <h3 class="filter-header">Фильтр по категориям</h3>
     <app-filter-category
-      [category]="category"
+      [category]="stateService.category"
       [selectCategory]="selectCategory"
-      [meta]="meta"
+      [meta]="stateService.metaForCategory"
       (resetFilter)="resetFilter()"
       (filterCategory)="filterCategory($event)"
     ></app-filter-category>
@@ -17,6 +17,7 @@
 </ng-container>
 
 
-<ng-container *ngIf="!loading">
-  <app-card [polls]="polls" [selectCategory]="selectCategory"></app-card>
+<ng-container *ngIf="!stateService.loading">
+  <app-cards [polls]="stateService.polls" [selectCategory]="selectCategory"></app-cards>
 </ng-container>
+

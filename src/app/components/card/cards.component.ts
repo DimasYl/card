@@ -1,9 +1,9 @@
-import {Component, Input} from "@angular/core";
+import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
 import {PollCategory, PollWithCategoryMeta} from "../../data-access/types";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-cards',
   standalone: true,
   imports: [CommonModule, NgOptimizedImage],
   template: `
@@ -25,10 +25,11 @@ import {CommonModule, NgOptimizedImage} from "@angular/common";
     </div>
     <ng-template #emptyTemplate><h2 class="empty-card">По выбранной категории список пуст</h2></ng-template>
   `,
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./cards.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class CardComponent {
+export class CardsComponent {
   @Input()
   public polls: PollWithCategoryMeta[] = []
   @Input()
